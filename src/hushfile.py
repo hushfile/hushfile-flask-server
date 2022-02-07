@@ -10,11 +10,18 @@ from flask_mail import Mail, Message
 
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__, template_folder="static")
-mail = Mail(app)
+with open(os.path.join(os.path.dirname(__file__), "config.json")) as f:
+    config = json.loads(f.read())
 
-app.config["SECRET"] = "my secret key"
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+app = Flask(__name__, template_folder="static")
+
+app.config["SECRET"] = config["flask_secret_key"]
+app.config["MAIL_SERVER"] = config["email_server_hostname"]
+app.config["MAIL_PORT"] = config["email_server_port"]
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = config["email_server_username"]
+app.config["MAIL_PASSWORD"] = config["email_server_password"]
+mail = Mail(app)
 
 
 def get_unique_id():
@@ -176,9 +183,6 @@ app.add_url_rule(
     "/api/delete", view_func=FileView.as_view("api_delete", apicall="delete")
 )
 app.add_url_rule("/api/ip", view_func=FileView.as_view("api_ip", apicall="ip"))
-
-with open(os.path.join(os.path.dirname(__file__), "config.json")) as f:
-    config = json.loads(f.read())
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

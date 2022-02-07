@@ -1,6 +1,10 @@
 {
   "data_path": "/home/user/hushfiledata/",
   "email_sender": "hushfile@example.com",
+  "email_server_hostname": "smtp.example.com",
+  "email_server_port": 587,
+  "email_server_username": "hushfile@example.com",
+  "email_server_password": "hunter42",
   "admin": {
     "name": "John Doe",
     "email": "jdoe@example.com",
