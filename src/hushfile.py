@@ -177,7 +177,7 @@ app.add_url_rule(
 )
 app.add_url_rule("/api/ip", view_func=FileView.as_view("api_ip", apicall="ip"))
 
-with open("config.json") as f:
+with open(os.path.join(os.path.dirname(__file__), "config.json")) as f:
     config = json.loads(f.read())
 
 if __name__ == "__main__":
