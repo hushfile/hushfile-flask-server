@@ -102,11 +102,11 @@ def upload():
     if config["admin"]["send_email"]:
         # send email
         msg = Message(
-            "new file uploaded to {request.server_name}",
+            f"new file uploaded to {request.host_url}",
             sender=config["email_sender"],
             recipients=[f"{config['admin']['name']} <{config['admin']['email']}>"],
         )
-        msg.body = f"new file uploaded to {request.server_name}: https://{request.server_name}/{fileid}"
+        msg.body = f"new file uploaded to {request.host_url}{fileid}"
         mail.send(msg)
 
     # return response
