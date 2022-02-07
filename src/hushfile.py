@@ -104,9 +104,9 @@ def upload():
         msg = Message(
             "new file uploaded to {request.server_name}",
             sender=config["email_sender"],
-            recipients=["{config['admin']['name']} <{config['admin']['email']}>"],
+            recipients=[f"{config['admin']['name']} <{config['admin']['email']}>"],
         )
-        msg.body = "new file uploaded to {request.server_name}: https://{request.server_name}/{fileid}"
+        msg.body = f"new file uploaded to {request.server_name}: https://{request.server_name}/{fileid}"
         mail.send(msg)
 
     # return response
