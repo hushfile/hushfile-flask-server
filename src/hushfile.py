@@ -21,6 +21,7 @@ app.config["MAIL_PORT"] = config["email_server_port"]
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = config["email_server_username"]
 app.config["MAIL_PASSWORD"] = config["email_server_password"]
+app.config["MAX_FORM_MEMORY_SIZE"] = 104857600
 mail = Mail(app)
 
 
